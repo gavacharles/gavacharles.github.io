@@ -101,6 +101,37 @@ code.tag { font: 600 .74rem var(--font); padding: 2px 8px; border-radius: 999px;
 .wl-off { color: var(--muted); }
 hr { border: 0; border-top: 1px solid var(--line); margin: 1.5em 0; }
 
+/* home: interests, why */
+.interest { gap: 8px; }
+.interest:hover { transform: none; }
+.interest p { -webkit-line-clamp: unset; }
+.interest .chips { margin-top: auto; padding-top: 6px; }
+.chip.pub { background: var(--surface-2); border-color: var(--line-2); }
+h3.year { font-size: .95rem; color: var(--gold); margin: 22px 0 8px; letter-spacing: .06em; }
+:root[data-theme="light"] h3.year { color: var(--link); }
+.pubs { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; max-width: 90ch; }
+.pubs li { overflow-wrap: anywhere; scroll-margin-top: 80px; }
+.pubs li:target { background: var(--gold-soft); border-radius: 8px; padding: 4px 8px; }
+.pubs a { font-weight: 600; }
+.bg .card:hover { transform: none; }
+.bg ul { margin: 6px 0 0; padding-left: 1.1em; color: var(--muted); font-size: .93rem; }
+.bg li { margin: .35em 0; }
+.methods { margin: 18px 0 0; color: var(--muted); }
+.methods .eyebrow { margin: 0 8px 0 0; }
+.pillar { padding: 24px; }
+.pillar .num { font: 700 .8rem var(--display); color: var(--gold); letter-spacing: .1em; }
+:root[data-theme="light"] .pillar .num { color: var(--link); }
+.pillar h3 { font-size: 1.25rem; }
+.pillar p { -webkit-line-clamp: unset; }
+.why { margin: 20px 0; padding: 32px 28px; border-radius: var(--radius); background: linear-gradient(135deg, var(--gold-soft), transparent 60%), var(--surface); border: 1px solid var(--gold-line); }
+.why h2 { font-size: clamp(1.5rem, 3vw, 2rem); max-width: 24ch; }
+.principles { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin-top: 20px; }
+.principles h3 { font-size: 1rem; margin: 0 0 4px; }
+.principles h3::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--gold); margin-right: 8px; vertical-align: middle; }
+.principles p { margin: 0; color: var(--muted); font-size: .93rem; }
+.hero h1 { max-width: 22ch; }
+@media (max-width: 640px) { .brand-name { font-size: .95rem; } .links a[href$="#research"], .links a[href$="#publications"], .links a[href$="topics/"] { display: none; } .hero .cta .btn.ghost { height: 38px; padding: 0 14px; font-size: .9rem; } }
+
 /* filters */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
 .filters .chip { cursor: pointer; background: var(--surface); border-color: var(--line-2); padding: 6px 12px; }
