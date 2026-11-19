@@ -239,3 +239,20 @@ h1 em, h2 em { font-style: italic; color: var(--gold); font-weight: inherit; }
   .portrait-wrap figcaption { margin: 0; text-align: left; }
   .portrait-wrap .portrait { flex: none; }
 }
+
+/* project explainers + status badges */
+.status-badge { display: inline-block; align-self: flex-start; padding: 3px 10px; border-radius: 999px; font: 700 .7rem var(--font);
+  letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--line-2); color: var(--muted); margin-bottom: 4px; }
+.page-head .status-badge { margin-bottom: 12px; }
+.s-working-paper { color: var(--gold); border-color: var(--gold-line); background: var(--gold-soft); }
+:root[data-theme="light"] .s-working-paper { color: var(--link); }
+.s-interactive-map, .s-live-platform, .s-forecast { color: #6fd3a4; border-color: rgba(111,211,164,.35); background: rgba(111,211,164,.08); }
+:root[data-theme="light"] .s-interactive-map, :root[data-theme="light"] .s-live-platform, :root[data-theme="light"] .s-forecast { color: #1f7a52; }
+.explainer { display: grid; gap: 14px; margin-top: 8px; }
+.ex-block { padding: 20px 22px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.ex-block .eyebrow { margin-bottom: 6px; }
+.ex-block p { margin: 0; }
+.ex-q { font: 600 1.15rem/1.45 var(--display); color: var(--text); }
+.ex-block ul { margin: 0; padding-left: 1.1em; }
+.ex-block li { margin: .45em 0; }
+.ex-note { margin-top: 14px; }
