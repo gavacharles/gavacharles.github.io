@@ -68,4 +68,18 @@
                !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); open(); }
     });
   }
+
+  // rotating headline words
+  var rot = document.querySelector('.rotator');
+  if (rot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var words = rot.dataset.words.split('|'), i = 0, el = rot.querySelector('.rot-word');
+    setInterval(function () {
+      el.classList.remove('in'); el.classList.add('out');
+      setTimeout(function () {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('out'); el.classList.add('in');
+      }, 340);
+    }, 2600);
+  }
 })();
