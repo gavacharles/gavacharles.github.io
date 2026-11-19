@@ -169,3 +169,16 @@ h3.year { font-size: .95rem; color: var(--gold); margin: 22px 0 8px; letter-spac
 :root[data-theme="light"] .search li .k { color: var(--link); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 @media (max-width: 440px) { .brand-name { display: none; } .nav-in { gap: 8px; } }
+
+/* portrait */
+.hero.has-photo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 340px); gap: 48px; align-items: center; }
+.portrait { margin: 0; border-radius: 22px; overflow: hidden; border: 1px solid var(--gold-line); box-shadow: 0 30px 80px rgba(0,0,0,.35); aspect-ratio: 2 / 3; background: #0b0b0c; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 860px) {
+  .hero.has-photo { grid-template-columns: 1fr; gap: 24px; }
+  .portrait { order: -1; width: 140px; aspect-ratio: 1; border-radius: 50%; }
+  .portrait img { object-position: 50% 18%; }
+}
+.cv-head { position: relative; }
+.cv-photo { float: right; width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; border: 2px solid var(--gold-line); margin: 0 0 12px 20px; }
+@media (max-width: 640px) { .cv-photo { float: none; display: block; width: 110px; height: 110px; margin: 0 0 14px; } }
