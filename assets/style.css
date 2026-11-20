@@ -256,3 +256,11 @@ h1 em, h2 em { font-style: italic; color: var(--gold); font-weight: inherit; }
 .ex-block ul { margin: 0; padding-left: 1.1em; }
 .ex-block li { margin: .45em 0; }
 .ex-note { margin-top: 14px; }
+
+/* justified body text (tablet/desktop); phones stay left-aligned to avoid gappy lines */
+@media (min-width: 641px) {
+  .lead, .prose p, .prose li, .ex-block p, .ex-block li, .card p, .step p, .principles p,
+  .agenda p, .bg li, .cv li, .cv-entry p, .pubs li, .finds li, .notes > ul > li, .foot p, .methods {
+    text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto;
+  }
+}
