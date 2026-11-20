@@ -261,6 +261,6 @@ h1 em, h2 em { font-style: italic; color: var(--gold); font-weight: inherit; }
 @media (min-width: 641px) {
   .lead, .prose p, .prose li, .ex-block p, .ex-block li, .card p, .step p, .principles p,
   .agenda p, .bg li, .cv li, .cv-entry p, .pubs li, .finds li, .notes > ul > li, .foot p, .methods {
-    text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto;
+    text-align: justify; text-justify: inter-word; hyphens: manual; -webkit-hyphens: manual; overflow-wrap: break-word;
   }
 }
