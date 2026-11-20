@@ -1,11 +1,38 @@
 (function () {
   var root = document.documentElement;
 
+  // analytics events (GoatCounter; no cookies). Page views are counted by count.js itself.
+  function gc(path, title) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title || path, event: true }); } catch (e) {}
+  }
+  var SITE_DIRS = { '': 1, research: 1, cv: 1, topics: 1, projects: 1, assets: 1 };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var href = a.getAttribute('href'), where = location.pathname, label = (a.textContent || '').trim().slice(0, 60);
+    var title = label + ' (on ' + where + ')', u;
+    if (/^mailto:/i.test(href)) return gc('click/email', title);
+    try { u = new URL(a.href); } catch (err) { return; }
+    if (u.host === location.host) {
+      var seg = u.pathname.split('/')[1] || '';
+      if (!SITE_DIRS[seg] && !/\.(json|xml|txt)$/.test(seg)) return gc('out/live/' + seg, title);
+      if (seg === 'cv' && where.indexOf('/cv/') !== 0) return gc('click/cv', title);
+      return;
+    }
+    var h = u.hostname.replace(/^www\./, ''), m;
+    if (h === 'github.com') { m = u.pathname.split('/'); return gc('out/github/' + (m[2] || m[1] || ''), title); }
+    if (/scholar\.google/.test(h)) return gc('out/scholar', title);
+    if (/linkedin\.com$/.test(h)) return gc('out/linkedin', title);
+    if (/orcid\.org$/.test(h)) return gc('out/orcid', title);
+    if (/doi\.org$/.test(h)) return gc('out/doi' + u.pathname, title);
+    gc('out/' + h, title);
+  }, true);
+
   // theme toggle (dark is default; choice remembered per browser)
   var tb = document.getElementById('theme');
   if (tb) tb.addEventListener('click', function () {
     var next = root.dataset.theme === 'light' ? 'dark' : 'light';
     root.dataset.theme = next;
+    gc('theme/' + next, 'Theme switched to ' + next);
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
@@ -15,6 +42,7 @@
     var b = e.target.closest('[data-f]'); if (!b) return;
     filters.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === b); });
     var f = b.dataset.f;
+    gc('filter/' + (f || 'all'), 'Project filter: ' + (b.textContent || '').trim());
     document.querySelectorAll('#plist .card').forEach(function (c) {
       c.hidden = f && (c.dataset.topics || '').split(' ')[0] !== f;
     });
@@ -51,7 +79,14 @@
   if (box) {
     document.getElementById('search-open').addEventListener('click', open);
     box.addEventListener('click', function (e) { if (e.target === box) close(); });
-    q.addEventListener('input', render);
+    var qt, lastQ = '';
+    q.addEventListener('input', function () {
+      render(); clearTimeout(qt);
+      qt = setTimeout(function () {
+        var v = q.value.trim().toLowerCase().slice(0, 40);
+        if (v.length > 2 && v !== lastQ) { lastQ = v; gc('search/' + v, 'Search: ' + v); }
+      }, 1500);
+    });
     q.addEventListener('keydown', function (e) {
       var links = out.querySelectorAll('a');
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
